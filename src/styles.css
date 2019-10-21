@@ -12,3 +12,7 @@
   width: 100vw;
   overflow: hidden;
 }
+
+.arte-scene-view {
+  height: 100%;
+}

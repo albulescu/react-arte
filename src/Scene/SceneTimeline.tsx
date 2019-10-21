@@ -211,7 +211,7 @@ export class SceneTimeline extends Component<SceneTimelineProps, SceneTimelineSt
     return ReactDOM.findDOMNode(scene) as Element;
   }
 
-  createScenes(props: SceneContextProps): React.ReactNode {
+  createScenesViews(props: SceneContextProps): React.ReactNode {
     this.sceneContextProps = props;
     return React.Children.map(this.props.children, (scene: React.ReactElement, index: number) => {
       return <scene.type key={index} {...scene.props} ref={(ref: any) => this.items[index] = ref}></scene.type>
@@ -227,7 +227,7 @@ export class SceneTimeline extends Component<SceneTimelineProps, SceneTimelineSt
             <SceneTimelineContext.Consumer>
               {(props: SceneContextProps) => (
                 <div ref={ref => this.element = ref as HTMLDivElement} className="arte-scene-timeline">
-                  {this.createScenes(props)}
+                  {this.createScenesViews(props)}
                 </div>
               )}
             </SceneTimelineContext.Consumer>
