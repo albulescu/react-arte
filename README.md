@@ -15,12 +15,58 @@ npm install --save react-arte
 ```tsx
 import * as React from 'react'
 
-import MyComponent from 'react-arte'
+import { Page, Scene, SceneTimeline, SceneView } from 'react-arte'
+
+class ComponentA extends React.Component {
+  render() {
+    return (
+      <SceneTimeline>
+        <SceneView>
+          Custom component A
+        </SceneView>
+      </SceneTimeline>
+    )
+  }
+}
+
+class ComponentB extends React.Component {
+  render() {
+    return (
+      <SceneTimeline parallax>
+        <SceneView>
+          Custom component B
+        </SceneView>
+      </SceneTimeline>
+    )
+  }
+}
+
+class ComponentC extends React.Component {
+  render() {
+    return (
+      <SceneTimeline>
+        <SceneView>
+          Custom component C
+        </SceneView>
+      </SceneTimeline>
+    )
+  }
+}
 
 class Example extends React.Component {
   render () {
     return (
-      <MyComponent />
+      <Page>
+        <Scene>
+          <ComponentA />
+        </Scene>
+        <Scene>
+          <ComponentB />
+        </Scene>
+        <Scene>
+          <ComponentC />
+        </Scene>
+      </Page>
     )
   }
 }
