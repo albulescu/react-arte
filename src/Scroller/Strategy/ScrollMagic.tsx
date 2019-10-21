@@ -132,32 +132,32 @@ export class ScrollMagicStrategy implements ScrollingStrategy  {
     return !(rect.bottom < 0 || rect.right < 0 || rect.left > window.innerWidth || rect.top > window.innerHeight);
   }
 
-  registerScene(section:Scene): void {
+  registerScene(scene:Scene): void {
     
-    const element = section.getElement();
+    const element = scene.getElement();
 
-    const scene = new ScrollMagic.Scene({
-      duration: 500,// props.duration,
+    const scrollMagicScene = new ScrollMagic.Scene({
+      duration: scene.props.duration ? scene.props.duration : 100,
       triggerElement: element,
     });
 
-    scene.setPin(element, {...section.props, pushFollowers: true});
-    scene.enabled(true);
+    scrollMagicScene.setPin(element, {...scene.props, pushFollowers: true});
+    scrollMagicScene.enabled(true);
 
-    const forwardEvent = (name: ScrollerEventName) => () => section.getEvents().emit(
+    const forwardEvent = (name: ScrollerEventName) => () => scene.getEvents().emit(
       new ScrollerEvent(name)
     );
 
-    scene.on('enter', forwardEvent(ScrollerEvent.SceneEnter));
-    scene.on('start', forwardEvent(ScrollerEvent.SceneStart));
-    scene.on('leave', forwardEvent(ScrollerEvent.SceneLeave));
-    scene.on('progress', (event: any) => section.getEvents().emit(
+    scrollMagicScene.on('enter', forwardEvent(ScrollerEvent.SceneEnter));
+    scrollMagicScene.on('start', forwardEvent(ScrollerEvent.SceneStart));
+    scrollMagicScene.on('leave', forwardEvent(ScrollerEvent.SceneLeave));
+    scrollMagicScene.on('progress', (event: any) => scene.getEvents().emit(
       new ScrollerEvent(ScrollerEvent.SceneProgress, {progress: event.progress, direction: event.scrollDirection})
     ));
 
-    this.controller.addScene(scene);
-    this.scenes.push(section);
-    this.scrollMagicScenes.push(scene);
+    this.controller.addScene(scrollMagicScene);
+    this.scenes.push(scene);
+    this.scrollMagicScenes.push(scrollMagicScene);
   }
 
   start() {}
