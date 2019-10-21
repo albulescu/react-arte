@@ -72,6 +72,68 @@ class Example extends React.Component {
 }
 ```
 
+## Component Hooks
+
+```jsx 
+
+  /**
+   * Scene enters the viewport
+   */
+  onScreenEnter() {
+    
+  }
+
+  /**
+   * Scene entering the viewport progress
+   */
+  onScreenEnterProgress(event: ScrollerEvent) {
+
+  }
+
+  /**
+   * Scene completly in the viewport
+   */
+  onSceneEnter(event: ScrollerEvent) {
+    
+  }
+
+  /**
+   * Scene start scrolling
+   */
+  onSceneStart(event: ScrollerEvent) {
+    
+  }
+
+  /**
+   * Scene scroll progress
+   */
+  onSceneProgress(event: ScrollerEvent) {
+    
+  }
+
+  /**
+   * Scene leaving
+   */
+  onSceneLeave(event: ScrollerEvent) {
+    
+  }
+
+  /**
+   * Scene leaving the viewport progress
+   */
+  onScreenLeaveProgress(event: ScrollerEvent) {
+    
+  }
+
+  /**
+   * Scene leave the viewport
+   */
+  onScreenLeave() {
+    
+  }
+
+```
+
 ## License
 
 MIT © [artus.com](https://github.com/artus.com)
