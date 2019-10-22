@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// @ts-ignore
-import ScrollMagic from 'scrollmagic';
 import { Scroller } from '../Scroller/Scroller';
 
 export type PageProps = {

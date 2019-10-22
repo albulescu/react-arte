@@ -13,25 +13,25 @@ export class Scroller {
   private strategy: ScrollingStrategy;
 
   constructor(page: any, strategyName: ScrollStrategyName | string, props?: any) {
-    
-    console.log('Use scrolling strategy:', strategyName);
 
-    if (strategyName === ScrollStrategyName.ScrollMagic) {
-      this.strategy = new ScrollMagicStrategy(page, props);
-    } else {
-      this.strategy = new ArteStrategy(page, props);
-    }
+    try {
+      if (strategyName === ScrollStrategyName.ScrollMagic) {
+        this.strategy = new ScrollMagicStrategy(page, props);
+      } else {
+        this.strategy = new ArteStrategy(page, props);
+      }
+     } catch(e) {}
   }
 
   registerScene(section: Scene) {
-    this.strategy.registerScene(section);
+    this.strategy && this.strategy.registerScene(section);
   }
 
   start() {
-    this.strategy.start();
+    this.strategy && this.strategy.start();
   }
 
   reset(): void {
-    this.strategy.reset();
+    this.strategy && this.strategy.reset();
   }
 }

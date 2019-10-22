@@ -26,17 +26,17 @@ export default {
   ],
   context: "window",
   plugins: [
-    external(),
     postcss({
       plugins: []
     }),
-    url(),
-    svgr(),
-    resolve(),
     typescript({
       rollupCommonJSResolveHack: true,
       clean: true
     }),
-    commonjs()
+    commonjs({
+      namedExports: {
+        'scrollmagic': [ 'Scene', 'Controller' ]
+      }
+    })
   ]
 }

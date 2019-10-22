@@ -2,8 +2,6 @@ import { ScrollingStrategy } from "./Interfaces";
 import { ScrollerEvent, ScrollerEventName } from '../../Core/Events';
 import { throttle } from '../../Core/Utils';
 import { Scene } from '../..';
-//@ts-ignore
-import ScrollMagic from 'scrollmagic';
 
 export interface ScrollMagicControllerProperties {
   [key: string]: string
@@ -44,6 +42,10 @@ export class ScrollMagicStrategy implements ScrollingStrategy  {
   lastScrollTop = 0;
 
   constructor(_page: any, _props: ScrollMagicControllerProperties) {
+    
+    var ScrollMagic = require('scrollmagic');
+
+    //@ts-ignore
     this.controller = new ScrollMagic.Controller({
       globalSceneOptions:{ triggerHook: 'onLeave' }
     });
@@ -86,6 +88,7 @@ export class ScrollMagicStrategy implements ScrollingStrategy  {
     else if (delta > 0) { direction = ScrollerEvent.DirectionForward; }
 
     var viewport = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    // todo: ie 11 fix
     var rect: DOMRect = scene.getElement().getBoundingClientRect() as DOMRect;
     
     const index = this.scenes.indexOf(scene);
@@ -134,7 +137,10 @@ export class ScrollMagicStrategy implements ScrollingStrategy  {
   registerScene(scene:Scene): void {
     
     const element = scene.getElement();
+  
+    var ScrollMagic = require('scrollmagic');
 
+    //@ts-ignore
     const scrollMagicScene = new ScrollMagic.Scene({
       duration: scene.props.duration ? scene.props.duration : 100,
       triggerElement: element,
