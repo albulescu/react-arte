@@ -1,10 +1,9 @@
-// @ts-ignore
-import ScrollMagic from 'scrollmagic';
-// @ts-ignore
 import { ScrollingStrategy } from "./Interfaces";
 import { ScrollerEvent, ScrollerEventName } from '../../Core/Events';
 import { throttle } from '../../Core/Utils';
 import { Scene } from '../..';
+//@ts-ignore
+import ScrollMagic from 'scrollmagic';
 
 export interface ScrollMagicControllerProperties {
   [key: string]: string

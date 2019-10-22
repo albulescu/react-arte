@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { TimelineMax, TimelineLite } from 'gsap';
 import { SceneView } from './SceneView';
 import { ScrollerEvent, EventEmitter } from '../Core/Events';
-import { Scene, InternalSceneContext } from '..';
+import { Scene, InternalSceneContext } from './Scene';
 
 export interface InitialTweenState {
   target: any;
