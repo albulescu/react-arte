@@ -38,6 +38,7 @@ export type SceneTimelineProps = {
   initial: InitialTweenState[],
   states: TweenState[][]
   parallax?: boolean;
+  vsize?: boolean;
 }
 
 export type SceneTimelineState = {}
@@ -219,6 +220,13 @@ export class SceneTimeline extends Component<SceneTimelineProps, SceneTimelineSt
   }
 
   render() {
+    const { vsize } = this.props;
+    const classes = ['arte-scene-timeline'];
+
+    if (vsize) {
+      classes.push('arte-scene-timeline-vsize');
+    }
+
     return (
       <InternalSceneContext.Consumer>
         {(scene: Scene) => {
@@ -226,7 +234,7 @@ export class SceneTimeline extends Component<SceneTimelineProps, SceneTimelineSt
           return (
             <SceneTimelineContext.Consumer>
               {(props: SceneContextProps) => (
-                <div ref={ref => this.element = ref as HTMLDivElement} className="arte-scene-timeline">
+                <div ref={ref => this.element = ref as HTMLDivElement} className={classes.join(', ')}>
                   {this.createScenesViews(props)}
                 </div>
               )}

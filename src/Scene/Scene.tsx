@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 // @ts-ignore
-import ScrollMagic from 'scrollmagic';
-import { SceneTimeline } from '../Scene/SceneTimeline';
 import { Scroller } from '../Scroller/Scroller';
 import { ScrollerEvent, EventEmitter } from '../Core/Events';
 
@@ -15,31 +13,34 @@ export type SceneProps = {
    * Duration to stick to this section. 
    * The progress of scrolling is sent to the timeline
    */
-  duration?:number
+  duration?: number
+
+  /**
+   * Pin scene
+   */
+  pin?: boolean;
 
   /**
    * Show / hide animation of this scene
    * Available animations:
    * - parallax
    */
-  animation?: string;
+  animation?: string
 
   /**
    * Animation options
    */
-  animationOpts?: any;
+  animationOpts?: any
 }
 
-export type SceneState = {}
-
-export class Scene extends Component<SceneProps, SceneState> {
+export class Scene extends Component<SceneProps, {}> {
 
   visible: boolean;
 
   /**
-   * SceneTimeline used by custom component of this scene
+   * Internal container used by custom component of this scene
    */
-  container: SceneTimeline;
+  container: any;
 
   /**
    * Scroller Events of this scene
@@ -67,11 +68,12 @@ export class Scene extends Component<SceneProps, SceneState> {
 
     const execCompFn = (fn: string, event?: any) => {
 
-      if (typeof(component[fn]) === 'function') {
+      if (component && typeof(component[fn]) === 'function') {
         component[fn](event);
       }
 
-      if (this.container && typeof(this.container[fn]) === 'function') {
+      if (typeof(this.container) !== 'undefined' &&
+        typeof(this.container[fn]) === 'function') {
         this.container[fn](event);
       }
     };
@@ -113,10 +115,10 @@ export class Scene extends Component<SceneProps, SceneState> {
   }
 
   /**
-   * Link SceneTimeline with this section
+   * Link with this section
    * @param container Used to forward scrolling events
    */
-  setContainer(container: SceneTimeline) {
+  setContainer(container: any) {
     this.container = container;
   }
 
@@ -135,8 +137,13 @@ export class Scene extends Component<SceneProps, SceneState> {
   }
 
   render() {
-    const component: any = React.Children.only(this.props.children);
-    this.props.scroller.reset();
+
+    const { children, scroller } = this.props;
+
+    scroller.reset();
+    
+    const component: any = React.Children.only(children);
+
     return (
       <InternalSceneContext.Provider value={this}>
         <div ref={this.elementRef} className="arte-scene">

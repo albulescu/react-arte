@@ -89,7 +89,7 @@ export class ScrollMagicStrategy implements ScrollingStrategy  {
 
     var viewport = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     // todo: ie 11 fix
-    var rect: DOMRect = scene.getElement().getBoundingClientRect() as DOMRect;
+    var bounding: DOMRect = scene.getElement().getBoundingClientRect() as DOMRect;
     
     const index = this.scenes.indexOf(scene);
     const state = this.scrollMagicScenes[index].state();
@@ -104,12 +104,12 @@ export class ScrollMagicStrategy implements ScrollingStrategy  {
     }
 
     if (inViewPort && state === 'AFTER') {
-      progress = Math.abs(rect.y / viewport);
+      progress = Math.abs(bounding.top / viewport);
       progress = direction === ScrollerEvent.DirectionReverse ? 1 - progress : progress;
       visibility = direction === ScrollerEvent.DirectionReverse ? 'enter' : 'leave';
       
     } else if (inViewPort && state === 'BEFORE' ) {
-      progress = Math.abs(rect.y / viewport);
+      progress = Math.abs(bounding.top / viewport);
       progress = direction === ScrollerEvent.DirectionForward ? 1 - progress : progress;
       visibility = direction === ScrollerEvent.DirectionForward ? 'enter' : 'leave';
     } else if (!inViewPort && scene.visible ) {
@@ -146,7 +146,15 @@ export class ScrollMagicStrategy implements ScrollingStrategy  {
       triggerElement: element,
     });
 
-    scrollMagicScene.setPin(element, {...scene.props, pushFollowers: true});
+    if (scene.props.pin) {
+      scrollMagicScene.setPin(
+        element,
+        {...scene.props, pushFollowers: true}
+      );
+    } else {
+      scrollMagicScene.addTo(this.controller);
+    }
+
     scrollMagicScene.enabled(true);
 
     const forwardEvent = (name: ScrollerEventName) => () => scene.getEvents().emit(

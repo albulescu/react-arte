@@ -8,11 +8,24 @@
 }
 
 .arte-scene-timeline {
-  height: 100vh;
-  width: 100vw;
   overflow: hidden;
 }
 
-.arte-scene-view {
-  height: 100%;
+.arte-scene-state-list {
+  overflow: hidden;
+  position: relative;
+}
+
+.arte-scene-state-list .vsize {
+  width: 100vh;
+  height: 100vw;
+}
+
+.arte-scene-state {
+  position: absolute;
+}
+
+.arte-scene-timeline-vsize {
+  height: 100vh;
+  width: 100vw;
 }
