@@ -180,7 +180,7 @@ export class SceneTimeline extends Component<SceneTimelineProps, SceneTimelineSt
     if (event.data.direction === ScrollerEvent.DirectionForward) {
       anim.fromTo(this.element, 1, {yPercent: 0}, {yPercent: 50});
     } else {
-      anim.fromTo(this.element, 1, {yPercent: 0}, {yPercent: -50});
+      // anim.fromTo(this.element, 1, {yPercent: 0}, {yPercent: -50});
     }
     
     anim.totalProgress(event.data.progress);

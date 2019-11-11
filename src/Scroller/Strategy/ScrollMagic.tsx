@@ -149,7 +149,7 @@ export class ScrollMagicStrategy implements ScrollingStrategy  {
     if (scene.props.pin) {
       scrollMagicScene.setPin(
         element,
-        {...scene.props, pushFollowers: true}
+        {...scene.props}
       );
     } else {
       scrollMagicScene.addTo(this.controller);

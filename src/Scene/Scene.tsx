@@ -31,6 +31,8 @@ export type SceneProps = {
    * Animation options
    */
   animationOpts?: any
+
+  pushFollowers?: boolean;
 }
 
 export class Scene extends Component<SceneProps, {}> {
@@ -147,7 +149,7 @@ export class Scene extends Component<SceneProps, {}> {
     return (
       <InternalSceneContext.Provider value={this}>
         <div ref={this.elementRef} className="arte-scene">
-          <component.type ref={(ref: any) => this.setEvents(ref)}></component.type>
+          <component.type {...component.props} ref={(ref: any) => this.setEvents(ref)}></component.type>
         </div>
       </InternalSceneContext.Provider>
     );
